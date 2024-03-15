@@ -1,0 +1,110 @@
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+/* Estilo para el contenedor principal */
+#kt_content {
+    background-color: #ffff;
+    padding: 20px;
+}
+
+/* Estilo para el contenido interno */
+.innerMain_content {
+    padding: 10px;
+}
+
+/* Estilo para el formulario de perfil */
+#profile_form {
+    margin: 0 auto;
+    max-width: 500px;
+    text-align: left;
+}
+
+/* Estilo para el contenedor interno */
+.container.innerMain_container {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+/* Estilo para el encabezado principal de la página */
+.page-main-heading {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Estilo para el icono de persona */
+.bi.bi-person {
+    color: rgba(6, 158, 247, 0.849);
+}
+.bx.bxs-user-plus{
+    color: rgba(6, 158, 247, 0.849);
+}
+
+/* Estilo para el título de la página */
+.page-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Estilo para el icono de persona relleno */
+.bi.bi-person-fill {
+    color: rgba(6, 158, 247, 0.849);
+}
+
+/* Estilo para el grupo de formulario en una fila */
+.form-group.row {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+/* Estilo para las etiquetas de formulario */
+.col-sm-3.col-md-3.col-xxl-3.col-form-label.text-sm-end {
+    margin-bottom: 0;
+    margin-right: 10px;
+    font-size: 15px;
+    line-height: 21px;
+    word-spacing: 0px;
+    font-weight: bold;
+    white-space: nowrap;
+    width: 40%;
+    text-align: right;
+}
+
+/* Estilo para las columnas de formulario */
+.col-md-6.col-lg-5.col-xxl-4.col-sm-5 {
+    text-align: left;
+    margin-bottom: 0;
+    width: 70%;
+}
+
+/* Estilo para los campos de formulario */
+.form-control {
+    width: 100%;
+    height: 40px; /* Ajusta la altura según tus necesidades */
+    border-radius: 10px;
+}
+
+/* Estilo para los botones primarios */
+.btn.btn-primary {
+    background-color: rgba(6, 158, 247, 0.849);
+    color: #fff;
+    padding: 10px 20px;
+    margin-right: 10px;
+    margin-left: 25px;
+}
+
+/* Estilo para los botones secundarios */
+.btn.btn-secondary {
+    background-color: gray;
+    color: #fff;
+    padding: 10px 20px;
+    margin-right: 10px;
+}
+
+.btn.btn-success {
+    background-color: rgb(81, 163, 4);
+    color: #fff;
+    padding: 10px 20px;
+    margin-right: 10px;
+}
