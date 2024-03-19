@@ -1,10 +1,16 @@
 import { Router } from "express" 
-import { slash,renderregister,RenderLogin, SendData, cerrarSesion, home, RenderG, SendDatos, RenderL, DeleteE, Memp} from "../controllers/index.CO.js";
-import { logeado, notlogeado } from "../lib/privado.js";
+import{login, register, renderHome, renderlogin} from "../controllers/index.CO.js"
+
 
 const Inicio = Router();
 
-Inicio.get('/', slash)
+Inicio.get('/', renderHome)
+
+Inicio.get('/login',renderlogin)
+
+Inicio.post('/login',login)
+
+Inicio.post('/register',register)
 
 
 export default Inicio;
