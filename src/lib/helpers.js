@@ -19,31 +19,17 @@ helpers.descriptar = async (contra, Savecontra) => {
     }
 }
 
-helpers.VRolM = (rol) => {
-             
-        if(rol == 2){
+helpers.haypartidas = async (contador) => {
+    try {  
+        if(contador>0){
             return true
+        }else{
+            return false
         }
-        return false
-
+        
+    } catch (e) {
+        console.log(e)
+    }
 }
-helpers.VRolAs = (rol) => {
-             
-        if(rol == 3){
-            return true
-        }
-        return false
-
-}
-
-helpers.VRolAd = (rol) => {
-               
-        if(rol == 1){
-            return true
-        }
-        return false
-
-}
-//-----------------------------------------------------------------------
 
 export default helpers;
