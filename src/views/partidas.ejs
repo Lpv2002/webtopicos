@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<%- include('./head') %>
+<%- include('./barraperfil') %>
+<br>
+<br>
+<br>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center" style="padding: 10px; margin-top: 2%;">
+                <h1 class="page-title" style="margin-bottom: 10px;">Hola, <%= nombre %></h1>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <br>
+        <label for="search-input" style="margin-right: 10px;">Tus partidas:</label>
+        <form class="d-flex" role="search">
+            <input id="search-input" class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+    
+        <br>
+        <% if(cartas.length > 0) { %>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner" id="carousel-inner">
+                    <% for (let i = 0; i < cartas.length; i+=3) { %>
+                    <div class="carousel-item <%= i === 0 ? 'active' : '' %>">
+                        <div class="row row-cols-1 row-cols-md-3 g-4">
+                            <% for (let j = i; j < i + 3 && j < cartas.length; j++) { %>
+                            <div class="col carta">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <i class="bi bi-people-fill" style="font-size: 30px;"></i>
+                                        <h5 class="card-title"><%= cartas[j].titulo %></h5>
+                                        <p class="card-text">Participantes: <%= cartas[j].cantidad_usuarios %>/<%= cartas[j].participantes %></p>
+                                        <p class="card-text">Cuota: <%= cartas[j].montotal %></p>
+                                        <p class="card-text">Estado: <%= cartas[j].estado_nombre %></p>
+                                        <button class="btn btn-success iniciar-partida" data-cantidad-participantes="<%= cartas[j].cantidad_usuarios %>" data-id-partida="<%= cartas[j].id %>" data-bs-toggle="modal" data-bs-target="#exampleModal">Iniciar partida</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+                <button class="carousel-control-prev" type="button" data-target="#myCarousel" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-target="#myCarousel" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </button>
+            </div>
+        <% } %>
+        
+        <div class="d-flex justify-content-center" style="margin-top: 20px;">
+            <a href="/crearPartida"><button type="submit" class="btn btn-primary">Crear partida</button></a>
+        </div>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            var carouselInterval;
+    
+            $('#search-input').keyup(function(){
+                stopCarousel();
+                var searchText = $(this).val().toLowerCase();
+                $('.carta').each(function(){
+                    var titleText = $(this).find('.card-title').text().toLowerCase();
+                    if(titleText.includes(searchText)){
+                        $(this).show();
+                    } else {
+                        $(this).hide();
+                    }
+                });
+            });
+    
+            $('form').submit(function(){
+                startCarousel();
+            });
+    
+            function stopCarousel() {
+                clearInterval(carouselInterval);
+            }
+    
+            function startCarousel() {
+                carouselInterval = setInterval(function(){
+                    $('#myCarousel').carousel('next');
+                }, 5000); // Cambia 5000 por el tiempo en milisegundos entre cada cambio de slide
+            }
+    
+            // Manejar el clic en el botón "Iniciar partida"
+            $('.iniciar-partida').click(function() {
+                var participantes = parseInt($(this).data('cantidad-participantes'));
+                if (participantes < 3) {
+                    $('#modal-body-text').text('No hay suficientes participantes ¿Desea Invitar más jugadores antes de iniciar la partida?');
+                    $('.btn-iniciar').hide();
+                } else {
+                    $('#modal-body-text').text('¿Estás seguro de que deseas iniciar la partida?');
+                    $('.btn-iniciar').show();
+                }
+                // Obtener el ID de la partida y establecerlo en el formulario dentro del modal
+                var idPartida = $(this).data('id-partida');
+                $('#form-invitar input[name="idPartida"]').val(idPartida);
+            });
+
+            // Enviar el formulario al hacer clic en el botón "Invitar"
+            $('#btn-invitar').click(function() {
+                $('#form-invitar').submit();
+            });
+        });
+    </script>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Iniciar Partida</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="form-invitar" method="get" action="/invitar">
+                    <div class="modal-body" id="modal-body-text">
+                        No hay suficientes participantes ¿Desea Invitar más jugadores antes de iniciar la partida?
+                    </div>
+                    <input type="hidden" name="idPartida">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button> 
+                        <button type="button" class="btn btn-primary" id="btn-invitar">Invitar</button> 
+                        <button class="btn btn-success btn-iniciar">Iniciar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

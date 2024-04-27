@@ -34,14 +34,7 @@ app.use(passport.session());
 app.use(express.static(join(__dirname, 'public')))
 
 app.use( async (req, res, next) => {    
-    app.locals.aprobado = req.flash("aprobado");
-    app.locals.denegado = req.flash("denegado");
-    app.locals.denegadoE = req.flash("denegadoE");
-
-    if (req.user) {
-        app.locals.VerM = helpers.VRolM(req.user.rol_id)
-        app.locals.VerAS = helpers.VRolAs(req.user.rol_id)
-        app.locals.VerAd = helpers.VRolAd(req.user.rol_id)
+    if (req.user) {       
                 
     } else {// si no hay mandamos la variable vacia
         app.locals.user = req.user;
