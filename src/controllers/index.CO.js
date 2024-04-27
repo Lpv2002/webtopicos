@@ -22,7 +22,7 @@ export const renderPartidas = async (req, res) => {
   const data = await response.json();  
   const cartas = data
   var paginas = Math.floor((cartas / 3) + 1)
-  res.render("partidas.ejs", { cartas, paginas });
+  res.render("partidas.ejs", { cartas, paginas, nombre:req.user.usser });
 };
 
 export const crearPartida = async (req, res) => {
