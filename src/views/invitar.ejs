@@ -1,148 +1,164 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>Pasanaku</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<%- include('./head') %>
-<%- include('./barraperfil') %>
-<br>
-<br>
-<br>
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center" style="padding: 10px; margin-top: 2%;">
-                <h1 class="page-title" style="margin-bottom: 10px;">Partida</h1>
+    <head>
+        <title>Pasanaku</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <%- include('./head') %>
+    <%- include('./barraperfil') %>
+    <br>
+    <br>
+    <br>
+
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center" style="padding: 10px; margin-top: 2%;">
+                    <h1 class="page-title" style="margin-bottom: 10px;">Partida</h1>
+                    <label>¡Invita amigos a tu partida!</label>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="container">
-        <div class="form-group" style="display: flex; justify-content: center; align-items: center;">
-            <label>¡Invita amigos a tu partida!</label>
-        </div>
+        <div class="container">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-outline-success">
+                    <i class="bi bi-pencil-fill"></i> Editar
+                </button>
+                <button type="button" class="btn btn-outline-danger">
+                    <i class="bi bi-trash-fill"></i> Borrar
+                </button>
+            </div>
 
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0">Lista de Invitados</h4>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h4 class="mb-0">Lista de Invitados</h4>
 
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                            data-target="#exampleModal">
-                            <i class="bi bi-person-fill-add"></i> Invitar
-                        </button>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                data-target="#exampleModal">
+                                <i class="bi bi-person-fill-add"></i> Invitar
+                            </button>
 
-                    </div>
+                        </div>
 
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="userList" class="table table-bordered table-hover table-striped">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Usuario</th>
-                                        <th scope="col">Telefono</th>
-                                        <th scope="col">Correo</th>
-                                        <th scope="col">Estado de solicitud</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <% for (let i = 0; i < invitados.length; i++) { %>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="userList" class="table table-bordered table-hover table-striped">
+                                    <thead class="thead-light">
                                         <tr>
-                                            <td scope="col"><%= i+1 %></td>
-                                            <td scope="col"><%= invitados[i].usser %></td>
-                                            <td scope="col"><%= invitados[i].telefono %></td>
-                                            <td scope="col"><%= invitados[i].correo %></td>
-                                            <td scope="col"><%= invitados[i].estado %></td>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Usuario</th>
+                                            <th scope="col">Telefono</th>
+                                            <th scope="col">Correo</th>
+                                            <th scope="col">Estado de solicitud</th>
+                                            <th scope="col"></th>
                                         </tr>
-                                    <% } %>
-                                </tbody>
-                            </table>
+                                    </thead>
+
+                                    <tbody>
+                                        <% for (let i = 0; i < invitados.length; i++) { %>
+                                            <tr>
+                                                <td scope="col"><%= i+1 %></td>
+                                                <td scope="col"><%= invitados[i].usser %></td>
+                                                <td scope="col"><%= invitados[i].telefono %></td>
+                                                <td scope="col"><%= invitados[i].correo %></td>
+                                                <td scope="col"><%= invitados[i].estado %></td>
+                                                <th scope="col">
+                                                    <button type="button" class="btn btn-secondary">
+                                                        <i class="bi bi-envelope-plus-fill"></i> Reenviar
+                                                    </button>
+                                                    <button type="button" class="btn btn-success">
+                                                        <i class="bi bi-pencil-fill"></i> Editar
+                                                    </button>
+                                                </th>
+                                            </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <form id="invitationForm" action="/invitar" method="POST">
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Invitar</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container">
-                            <div class="mb-3">
-                                <label for="emailInput" class="form-label">Correo:</label>
-                                <input type="email" class="form-control" id="emailInput" name="correo"
-                                    placeholder="Introduce el correo" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="phoneInput" class="form-label">Teléfono:</label>
-                                <input type="tel" class="form-control" id="phoneInput" name="telefono"
-                                    placeholder="Introduce el teléfono" required>
-                                <input type="hidden" id="partidaid" name="partidaid" value="<%= partida %>">
+        <form id="invitationForm" action="/invitar" method="POST">
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Invitar</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container">
+                                <div class="mb-3">
+                                    <label for="emailInput" class="form-label">Correo:</label>
+                                    <input type="email" class="form-control" id="emailInput" name="correo"
+                                        placeholder="Introduce el correo" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="phoneInput" class="form-label">Teléfono:</label>
+                                    <input type="tel" class="form-control" id="phoneInput" name="telefono"
+                                        placeholder="Introduce el teléfono" required>
+                                    <input type="hidden" id="partidaid" name="partidaid" value="<%= partida %>">
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" id="sendInvitationButton" class="btn btn-primary">Enviar
-                            invitación</button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" id="sendInvitationButton" class="btn btn-success">Enviar
+                                invitación</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            // Función para verificar si el correo o teléfono ya están en la lista de invitados
-            function isDuplicate(email, phone) {
-                var table = $('#userList tbody');
-                var isDuplicate = false;
-                table.find('tr').each(function () {
-                    var row = $(this);
-                    var rowEmail = row.find('td:eq(3)').text();
-                    var rowPhone = row.find('td:eq(2)').text();
-                    if (rowEmail === email || rowPhone === phone) {
-                        isDuplicate = true;
-                        return false; // Salir del bucle each cuando se encuentra un duplicado
+        <script>
+            $(document).ready(function () {
+                // Función para verificar si el correo o teléfono ya están en la lista de invitados
+                function isDuplicate(email, phone) {
+                    var table = $('#userList tbody');
+                    var isDuplicate = false;
+                    table.find('tr').each(function () {
+                        var row = $(this);
+                        var rowEmail = row.find('td:eq(3)').text();
+                        var rowPhone = row.find('td:eq(2)').text();
+                        if (rowEmail === email || rowPhone === phone) {
+                            isDuplicate = true;
+                            return false; // Salir del bucle each cuando se encuentra un duplicado
+                        }
+                    });
+                    return isDuplicate;
+                }
+
+                // Captura el evento submit del formulario de invitación
+                $('#invitationForm').submit(function (event) {
+                    var email = $('#emailInput').val();
+                    var phone = $('#phoneInput').val();
+                    if (isDuplicate(email, phone)) {
+                        alert('El correo o teléfono ya están en la lista de invitados.');
+                        event.preventDefault(); // Evita que el formulario se envíe
                     }
                 });
-                return isDuplicate;
-            }
-
-            // Captura el evento submit del formulario de invitación
-            $('#invitationForm').submit(function (event) {
-                var email = $('#emailInput').val();
-                var phone = $('#phoneInput').val();
-                if (isDuplicate(email, phone)) {
-                    alert('El correo o teléfono ya están en la lista de invitados.');
-                    event.preventDefault(); // Evita que el formulario se envíe
-                }
             });
-        });
-    </script>
-</body>
+        </script>
+    </body>
 
 </html>

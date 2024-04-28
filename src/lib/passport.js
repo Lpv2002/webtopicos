@@ -11,7 +11,7 @@ passport.use('local.login', new Strategy.Strategy({
     passReqToCallback: true
 }, async (req, usser, contrasena, done) => {
     try {
-        const response = await fetch("http://" + Dir + "/api/login", {
+        const response = await fetch(Dir + "/api/login", {
             method: "POST",
             mode: 'same-origin', // no-cors, *cors, same-origin
             cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -34,7 +34,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (user, done) => {
     try {
-        const response = await fetch("http://" + Dir + "/api/user/" + user + "", {
+        const response = await fetch(Dir + "/api/user/" + user + "", {
             method: "GET",
             headers: { "Content-Type": "application/json" },
         });

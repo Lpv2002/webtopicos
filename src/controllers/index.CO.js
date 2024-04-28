@@ -19,7 +19,7 @@ export const renderHome = async (req, res) => {
 };
 
 export const renderPartidas = async (req, res) => {
-  const response = await fetch("http://"+Dir+"/api/Partidas/"+req.user.usser)
+  const response = await fetch(Dir+"/api/Partidas/"+req.user.usser)
   const data = await response.json();  
   const cartas = data
   const nombre = req.user.usser
@@ -32,13 +32,13 @@ export const crearPartida = async (req, res) => {
 };
 
 export const crearPartidaForm = async (req, res) => {
-  const response = await fetch("http://"+Dir+"/api/partida/"+req.user.usser+"", {
+  const response = await fetch(Dir+"/api/partida/"+req.user.usser+"", {
     method: "post",
     body: JSON.stringify(req.body),
     headers: { "Content-Type": "application/json" },
-  });  
+  });
   const resp = await response.json()
-  const responsee = await fetch("http://"+Dir+"/api/invitados/"+resp+"")
+  const responsee = await fetch(Dir+"/api/invitados/"+resp+"")
   const data = await responsee.json();
   const invitados = data
   const partida = resp
@@ -47,12 +47,12 @@ export const crearPartidaForm = async (req, res) => {
 
 export const Invitar = async (req, res) => {  
   console.log(req.body)
-  const response = await fetch("http://"+Dir+"/api/invitar", {
+  const response = await fetch(Dir+"/api/invitar", {
     method: "post",
     body: JSON.stringify(req.body),
     headers: { "Content-Type": "application/json" },
   });
-  const responsee = await fetch("http://"+Dir+"/api/invitados/"+req.body.partidaid+"")
+  const responsee = await fetch(Dir+"/api/invitados/"+req.body.partidaid+"")
   const data = await responsee.json();
   const invitados = data
   const partida = req.body.partidaid
@@ -67,7 +67,7 @@ export const renderInvitar = async (req, res) => {
   }else{
     partida = req.body.partidaid
   }
-  const response = await fetch("http://"+Dir+"/api/invitados/"+partida+"")
+  const response = await fetch(Dir+"/api/invitados/"+partida+"")
   const data = await response.json();
   const invitados = data
   res.render("invitar.ejs", { invitados,partida });
@@ -82,7 +82,7 @@ export const SendData = passport.authenticate('local.login', {
 
 /* export const SendData = async (req, res) => {  
   console.log(req.body)
-  const response = await fetch("http://"+Dir+"/api/post", {
+  const response = await fetch(Dir+"/api/post", {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
     mode: 'cors', // no-cors, *cors, same-origin
     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -104,7 +104,7 @@ export const SendData = passport.authenticate('local.login', {
 
 export const register = async (req, res) => {
   try {
-    const response = await fetch("http://"+Dir+"/api/register", {
+    const response = await fetch(Dir+"/api/register", {
       method: 'post',
       body: JSON.stringify(req.body),
       headers: { "Content-Type": "application/json" },
