@@ -32,6 +32,7 @@ export const crearPartida = async (req, res) => {
 };
 
 export const crearPartidaForm = async (req, res) => {
+  console.log(req.body)
   const response = await fetch(Dir+"/api/partida/"+req.user.usser+"", {
     method: "post",
     body: JSON.stringify(req.body),
