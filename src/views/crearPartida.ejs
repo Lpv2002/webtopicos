@@ -48,9 +48,9 @@
                                             <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
                                                 <select class="form-control"  name="TiempoPago" required onchange="checkOther(this)">
                                                     <option value="">Selecciona una opción</option>
-                                                    <option value="15 Días">15 días</option>
-                                                    <option value="1 mes">1 mes</option>
-                                                    <option value="2 meses">2 meses</option>
+                                                    <option value="15">15 días(min)</option>
+                                                    <option value="1">1 mes(min)</option>
+                                                    <option value="2">2 meses(min)</option>
                                                     
                                                 </select>
                                                 <input class="form-control" id="otroInput" name="otroInput" type="text" value="" style="display: none;" />
@@ -93,10 +93,10 @@
 
                                         <div class="form-group row justify-content-center">
                                             <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
-                                                for="">Fecha de inicio:</label>
+                                                for="">Fecha de inicio: (min)</label>
                                             <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
                                                 <input class="form-control" data-val="true" 
-                                                    name="fechainicio" type="date" value="" required />
+                                                    name="fechainicio" type="number" value="" required />
                                             </div>
                                         </div>
 
