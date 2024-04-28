@@ -26,12 +26,28 @@
 
         <div class="container">
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="submit" class="btn btn-outline-success">
-                    <i class="bi bi-pencil-fill"></i> Editar
+                <button type="submit" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmModal2">
+                    <i class="bi bi-trash-fill"></i> Borrar partida
                 </button>
-                <button type="submit" class="btn btn-outline-danger">
-                    <i class="bi bi-trash-fill"></i> Borrar
-                </button>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="confirmModal2" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel">Confirmación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que quieres borrar la partida? Esta acción no se puede deshacer.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger">Borrar</button>
+                    </div>
+                </div>
+                </div>
             </div>
 
             <div class="tab-content" id="myTabContent">

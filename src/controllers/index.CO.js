@@ -18,6 +18,23 @@ export const renderHome = async (req, res) => {
   res.render("index.ejs");
 };
 
+export const renderPerfil = async (req, res) => {
+  try {
+    const response = await fetch(`${Dir}/api/user/${req.user.usser}`);
+    const data = await response.json();
+    const usuario = req.user.usser;
+    const nombre = req.user.nombre;
+    const contrasena = req.user.contrasena;
+    const correo = req.user.correo;
+    const telefono = req.user.telefono;
+    res.render("perfil.ejs", { data, usuario, nombre, contrasena, correo, telefono });
+  } catch (error) {
+    console.error("Error al obtener los datos del perfil:", error);
+    res.status(500).send("Error interno del servidor");
+  }
+};
+
+
 export const renderPartidas = async (req, res) => {
   const response = await fetch(Dir+"/api/Partidas/"+req.user.usser)
   const data = await response.json();  
