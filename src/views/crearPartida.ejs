@@ -1,81 +1,81 @@
 <!DOCTYPE html>
 <html>
-<%- include('./head') %>
-<%- include('./barraperfil') %>
-<br>
-<br>
-<br>
+    <%- include('./head') %>
+    <%- include('./barraperfil') %>
+    <br>
+    <br>
+    <br>
 
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center" style="padding: 10px; margin-top: 2%;">
-                <h1 class="page-title" style="margin-bottom: 10px;">Crear partida</h1>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center" style="padding: 10px; margin-top: 2%;">
+                    <h1 class="page-title" style="margin-bottom: 10px;">Crear partida</h1>
+                </div>
             </div>
         </div>
-    </div>
 
-    <form action="/crearPartida" method="POST">
-        <div id="kt_content" class="content d-flex flex-column flex-column-fluid">
-            <div class="innerMain_content">
-                <div class="container innerMain_container">
-    
-                    <div class="card" id="crop-avatar">
-                        
-                            <div class="card-body">
-                                <div class="form_section">
+        <form action="/crearPartida" method="POST">
+            <div id="kt_content" class="content d-flex flex-column flex-column-fluid">
+                <div class="innerMain_content">
+                    <div class="container innerMain_container">
+        
+                        <div class="card" id="crop-avatar">
+                            
+                                <div class="card-body">
+                                    <div class="form_section">
 
-                                    <div class="form-group row justify-content-center">
-                                        <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
-                                            for="sitio">Título:</label>
-                                        <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
-                                            <input class="form-control" data-val="true"  name="Nombre"
-                                                type="text" value="" required />
+                                        <div class="form-group row justify-content-center">
+                                            <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
+                                                for="sitio">Título:</label>
+                                            <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
+                                                <input class="form-control" data-val="true"  name="Nombre"
+                                                    type="text" value="" required />
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group row justify-content-center">
-                                        <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
-                                            for="sitio">Número de participantes:</label>
-                                        <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
-                                            <input class="form-control" data-val="true"  name="Participantes"
-                                                type="number" value="" required />
+                                        <div class="form-group row justify-content-center">
+                                            <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
+                                                for="sitio">Número de participantes:</label>
+                                            <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
+                                                <input class="form-control" data-val="true"  name="Participantes"
+                                                    type="number" value="" required />
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group row justify-content-center">
-                                        <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end" for="localizacion">Realizar pagos cada:</label>
-                                        <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
-                                            <select class="form-control"  name="TiempoPago" required onchange="checkOther(this)">
-                                                <option value="">Selecciona una opción</option>
-                                                <option value="15 Días">15 días</option>
-                                                <option value="1 mes">1 mes</option>
-                                                <option value="2 meses">2 meses</option>
-                                                
-                                            </select>
-                                            <input class="form-control" id="otroInput" name="otroInput" type="text" value="" style="display: none;" />
+                                        <div class="form-group row justify-content-center">
+                                            <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end" for="localizacion">Realizar pagos cada:</label>
+                                            <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
+                                                <select class="form-control"  name="TiempoPago" required onchange="checkOther(this)">
+                                                    <option value="">Selecciona una opción</option>
+                                                    <option value="15">15 días(min)</option>
+                                                    <option value="1">1 mes(min)</option>
+                                                    <option value="2">2 meses(min)</option>
+                                                    
+                                                </select>
+                                                <input class="form-control" id="otroInput" name="otroInput" type="text" value="" style="display: none;" />
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <script>
-                                        function checkOther(select) {
-                                            var otroInput = document.getElementById('otroInput');
-                                            if (select.value == 'otro') {
-                                                otroInput.style.display = 'block';
-                                            } else {
-                                                otroInput.style.display = 'none';
+                                        <script>
+                                            function checkOther(select) {
+                                                var otroInput = document.getElementById('otroInput');
+                                                if (select.value == 'otro') {
+                                                    otroInput.style.display = 'block';
+                                                } else {
+                                                    otroInput.style.display = 'none';
+                                                }
                                             }
-                                        }
-                                    </script>
+                                        </script>
 
-                                    <div class="form-group row justify-content-center">
-                                        <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
-                                            for="departamento">Cuota por participante:</label>
-                                        <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
-                                            <input class="form-control" data-val="true" 
-                                                name="MontoTotal" type="text" value="" required />
+                                        <div class="form-group row justify-content-center">
+                                            <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
+                                                for="departamento">Cuota por participante:</label>
+                                            <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
+                                                <input class="form-control" data-val="true" 
+                                                    name="MontoTotal" type="text" value="" required />
+                                            </div>
                                         </div>
-                                    </div>
 
                                     <div class="form-group row justify-content-center">
                                         <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end" for="moneda">Tipo de moneda:</label>
@@ -88,6 +88,33 @@
                                                 
                                             </select>
                                             <input class="form-control" id="otroInputMoneda" name="otroInputMoneda" type="text" value="" style="display: none;" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row justify-content-center">
+                                        <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
+                                            for="">Fecha de inicio:</label>
+                                        <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
+                                            <input class="form-control" data-val="true" 
+                                                name="fechainicio" type="date" value="" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row justify-content-center">
+                                        <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
+                                            for="">Monto de multa:</label>
+                                        <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
+                                            <input class="form-control" data-val="true" 
+                                                name="multa" type="number" value="" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row justify-content-center">
+                                        <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
+                                            for="">Duración de oferta:</label>
+                                        <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
+                                            <input class="form-control" data-val="true" 
+                                                name="tiempooferta" type="number" value="" required />
                                         </div>
                                     </div>
                                     
@@ -103,12 +130,12 @@
                                     </script>
                                     
 
+                                    </div>
                                 </div>
-                            </div>
 
                             <div class="form-group row justify-content-center">
                                 <div class="col-sm-9 offset-sm-3">
-                                    <a href="/partidas"><input type="button" class="btn btn-secondary" style="margin-left: 21%;"
+                                    <a href="/partidas"><input type="button" class="btn btn-danger" style="margin-left: 21%;"
                                         value="Cancelar" ></a>                                    
                                     <input type="submit" class="btn btn-primary" style="margin-left: 2%;"
                                         value="Crear partida">

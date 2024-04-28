@@ -1,5 +1,5 @@
 import { Router } from "express" 
-import{Invitar, SendData, cerrarSesion, crearPartida, crearPartidaForm,  register, renderHome, renderInvitar, renderPartidas, renderlogin} from "../controllers/index.CO.js"
+import{Invitar, SendData, cerrarSesion, crearPartida, crearPartidaForm,  register, renderHome, renderInvitar, renderPartidas, renderPerfil, renderlogin} from "../controllers/index.CO.js"
 
 
 const Inicio = Router();
@@ -10,9 +10,11 @@ Inicio.get('/login',renderlogin)
 
 Inicio.post('/login',SendData)
 
-Inicio.get('/cerrar', cerrarSesion);
+Inicio.get('/cerrar', cerrarSesion)
 
 Inicio.post('/register',register)
+
+Inicio.get('/perfil',renderPerfil)
 
 Inicio.get('/partidas',renderPartidas)
 
