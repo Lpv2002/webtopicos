@@ -53,7 +53,9 @@ export const crearPartidaForm = async (req, res) => {
     headers: { "Content-Type": "application/json" },
   });  
   const resp = await response.json()
-  const responsee = await fetch(Dir+"/api/invitados/"+resp+"")
+  const id = resp
+  console.log("la id es = "+ id)
+  const responsee = await fetch(Dir+"/api/invitados/"+id)
   const data = await responsee.json();
   const invitados = data
   const partida = resp
@@ -72,14 +74,28 @@ export const Invitar = async (req, res) => {
   const partida = req.body.partidaid
   res.render("invitar.ejs", { invitados,partida })
 };
+export const Iniciar = async (req, res) => {  
+  const response = await fetch(Dir+"/api/iniciar/:id_partida", {
+    method: "post",
+    body: JSON.stringify(req.body),
+    headers: { "Content-Type": "application/json" },
+  });
+  const responsee = await fetch(Dir+"/api/invitados/"+req.body.partidaid+"")
+  const data = await responsee.json();
+  const invitados = data
+  const partida = req.body.partidaid
+  res.render("invitar.ejs", { invitados,partida })
+};
 
 export const renderInvitar = async (req, res) => {
+  console.log(req.query)
+  var partida =""
   if(req.query != ''){
-    const partida = req.query.idPartida
+     partida = req.query.idPartida
   }else{
-    const partida = req.body.partidaid
+     partida = req.body.partidaid
   }
-  const partida = req.body.partida
+  //const partida = req.body.partida
   const response = await fetch(Dir+"/api/invitados/"+partida+"")
   const data = await response.json();
   const invitados = data
