@@ -1,123 +1,131 @@
 <!DOCTYPE html>
 <html>
-    <%- include('./head') %>
+<%- include('./head') %>
     <%- include('./barraperfil') %>
-    <br>
-    <br>
-    <br>
+        <br>
+        <br>
+        <br>
 
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-12 text-center" style="padding: 10px; margin-top: 2%;">
-                    <h1 class="page-title" style="margin-bottom: 10px;">Ver perfil</h1>
+        <body>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center" style="padding: 10px; margin-top: 2%;">
+                        <h1 class="page-title" style="margin-bottom: 10px;">Ver perfil</h1>
+                    </div>
                 </div>
-            </div>
 
-            <form>
-                <div id="kt_content" class="content d-flex flex-column flex-column-fluid">
-                    <div class="innerMain_content">
-                        <div class="container innerMain_container">
-            
-                            <div class="card" id="crop-avatar">
-                                
-                                <div class="card-body">
-                                    <div class="form_section">
+                <form enctype="multipart/form-data" action="/Update" method="post" >
+                    <div id="kt_content" class="content d-flex flex-column flex-column-fluid">
+                        <div class="innerMain_content">
+                            <div class="container innerMain_container">
 
-                                        <div class="form-group row justify-content-center">
-                                            <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
-                                                for="nombre">Usuario:</label>
-                                            <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
-                                                <input class="form-control" type="text" placeholder="" name="usser" value="<%= usuario %>">
-                                            </div>
-                                        </div>
+                                <div class="card" id="crop-avatar">
 
-                                        <div class="form-group row justify-content-center">
-                                            <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
-                                                for="nombre">Nombre Completo:</label>
-                                            <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
-                                                <input class="form-control" type="text" placeholder="" name="" value="<%= nombre %>">
-                                            </div>
-                                        </div>
+                                    <div class="card-body">
+                                        <div class="form_section">
 
-                                        <div class="form-group row justify-content-center">
-                                            <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
-                                                for="nombre">Contraseña:</label>
-                                            <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
-                                                <input class="form-control" type="text" placeholder="" name="contrasena" value="<%= contrasena %>">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row justify-content-center">
-                                            <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
-                                                for="nombre">Correo Electrónico:</label>
-                                            <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
-                                                <input class="form-control" type="text" placeholder="" name="correo" value="<%= correo %>">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row justify-content-center">
-                                            <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
-                                                for="nombre">Teléfono:</label>
-                                            <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
-                                                <input class="form-control" type="text" placeholder="" name="teléfono" value="<%= telefono %>">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row justify-content-center">
-                                            <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
-                                                for="nombre">Subir QR:</label>
-                                            <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
-                                                <input class="form-control" type="file" placeholder="" name="qr">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row justify-content-center">
-                                            <div class="col-sm-9 offset-sm-3">
-                                                <a href="/partidas"><input type="button" class="btn btn-primary" style="margin-left: 21%;"
-                                                    value="Volver" >
-                                                </a>                                    
-                                                <button type="submit" class="btn btn-success">
-                                                    <i class="bi bi-floppy2"></i> Guardar
-                                                </button>
-                                                <!-- Botón que activa el modal -->
-                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmModal">
-                                                    <i class="bi bi-trash-fill"></i> Borrar cuenta
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="confirmModalLabel">Confirmación</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    ¿Estás seguro de que quieres borrar tu cuenta? 
-                                                    Esta acción no se puede deshacer.
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="submit" class="btn btn-danger">Borrar</button>
+                                            <div class="form-group row justify-content-center">
+                                                <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
+                                                    for="nombre">Usuario:</label>
+                                                <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
+                                                    <input class="form-control" type="text" placeholder="" name="usser"
+                                                        value="<%= usuario %>">
                                                 </div>
                                             </div>
-                                            </div>
-                                        </div>
 
-                                    </div>
-                                </div>
-                                
+                                            <div class="form-group row justify-content-center">
+                                                <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
+                                                    for="nombre">Nombre Completo:</label>
+                                                <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
+                                                    <input class="form-control" type="text" placeholder="" name=""
+                                                        value="<%= nombre %>">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row justify-content-center">
+                                                <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
+                                                    for="nombre">Contraseña:</label>
+                                                <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
+                                                    <input class="form-control" type="text" placeholder=""
+                                                        name="contrasena" value="<%= contrasena %>">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row justify-content-center">
+                                                <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
+                                                    for="nombre">Correo Electrónico:</label>
+                                                <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
+                                                    <input class="form-control" type="text" placeholder="" name="correo"
+                                                        value="<%= correo %>">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row justify-content-center">
+                                                <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
+                                                    for="nombre">Teléfono:</label>
+                                                <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
+                                                    <input class="form-control" type="text" placeholder=""
+                                                        name="teléfono" value="<%= telefono %>">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row justify-content-center">
+                                                <label class="col-sm-3 col-md-3 col-xxl-3 col-form-label text-sm-end"
+                                                    for="nombre">Subir QR:</label>
+                                                <div class="col-md-6 col-lg-5 col-xxl-4 col-sm-5">
+                                                    <input class="form-control" type="file" placeholder="" name="qr" >
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row justify-content-center">
+                                                <div class="col-sm-9 offset-sm-3">
+                                                    <a href="/partidas"><input type="button" class="btn btn-primary"
+                                                            style="margin-left: 21%;" value="Volver">
+                                                    </a>
+                                                    <button type="submit" class="btn btn-success">
+                                                        <i class="bi bi-floppy2"></i> Guardar
+                                                    </button>
+                                                    <!-- Botón que activa el modal -->
+                                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                        data-bs-target="#confirmModal">
+                                                        <i class="bi bi-trash-fill"></i> Borrar cuenta
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                </form>
+                <!-- Modal -->
+                <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmModalLabel">Confirmación</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
-                            
+                            <div class="modal-body">
+                                ¿Estás seguro de que quieres borrar tu cuenta?
+                                Esta acción no se puede deshacer.
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-danger">Borrar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </form>
 
-        </div>
-    </body>
+            </div>
+            </div>
+
+            </div>
+
+            </div>
+            </div>
+            </div>
+
+            </div>
+        </body>
 
 </html>
