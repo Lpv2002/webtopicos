@@ -1,7 +1,6 @@
 import fetch from "node-fetch";
 import passport from 'passport';
 import Dir from "../routes/api-local.js";
-import axios from "axios";
 
 
 
@@ -18,13 +17,29 @@ export const renderHome = async (req, res) => {
   res.render("index.ejs");
 };
 
+export const renderPerfil = async (req, res) => {
+  try {
+    const response = await fetch(`${Dir}/api/user/${req.user.usser}`);
+    const data = await response.json();
+    const usuario = req.user.usser;
+    const nombre = req.user.nombre;
+    const contrasena = req.user.contrasena;
+    const correo = req.user.correo;
+    const telefono = req.user.telefono;
+    res.render("perfil.ejs", { data, usuario, nombre, contrasena, correo, telefono });
+  } catch (error) {
+    console.error("Error al obtener los datos del perfil:", error);
+    res.status(500).send("Error interno del servidor");
+  }
+};
+
+
 export const renderPartidas = async (req, res) => {
-  const response = await fetch("http://"+Dir+"/api/Partidas/"+req.user.usser)
+  const response = await fetch(Dir+"/api/Partidas/"+req.user.usser)
   const data = await response.json();  
   const cartas = data
-  const nombre = req.user.usser
   var paginas = Math.floor((cartas / 3) + 1)
-  res.render("partidas.ejs", { cartas, paginas, nombre });
+  res.render("partidas.ejs", { cartas, paginas, nombre:req.user.usser });
 };
 
 export const crearPartida = async (req, res) => {
@@ -32,13 +47,15 @@ export const crearPartida = async (req, res) => {
 };
 
 export const crearPartidaForm = async (req, res) => {
-  const response = await fetch("http://"+Dir+"/api/partida/"+req.user.usser+"", {
+  const response = await fetch(Dir+"/api/partida/"+req.user.usser+"", {
     method: "post",
     body: JSON.stringify(req.body),
     headers: { "Content-Type": "application/json" },
   });  
   const resp = await response.json()
-  const responsee = await fetch("http://"+Dir+"/api/invitados/"+resp+"")
+  const id = resp
+  console.log("la id es = "+ id)
+  const responsee = await fetch(Dir+"/api/invitados/"+id)
   const data = await responsee.json();
   const invitados = data
   const partida = resp
@@ -46,13 +63,24 @@ export const crearPartidaForm = async (req, res) => {
 };
 
 export const Invitar = async (req, res) => {  
-  console.log(req.body)
-  const response = await fetch("http://"+Dir+"/api/invitar", {
+  const response = await fetch(Dir+"/api/invitar", {
     method: "post",
     body: JSON.stringify(req.body),
     headers: { "Content-Type": "application/json" },
   });
-  const responsee = await fetch("http://"+Dir+"/api/invitados/"+req.body.partidaid+"")
+  const responsee = await fetch(Dir+"/api/invitados/"+req.body.partidaid+"")
+  const data = await responsee.json();
+  const invitados = data
+  const partida = req.body.partidaid
+  res.render("invitar.ejs", { invitados,partida })
+};
+export const Iniciar = async (req, res) => {  
+  const response = await fetch(Dir+"/api/iniciar/:id_partida", {
+    method: "post",
+    body: JSON.stringify(req.body),
+    headers: { "Content-Type": "application/json" },
+  });
+  const responsee = await fetch(Dir+"/api/invitados/"+req.body.partidaid+"")
   const data = await responsee.json();
   const invitados = data
   const partida = req.body.partidaid
@@ -60,56 +88,37 @@ export const Invitar = async (req, res) => {
 };
 
 export const renderInvitar = async (req, res) => {
-  var partida = ''
+  console.log(req.query)
+  var partida =""
   if(req.query != ''){
-    partida = req.query.idPartida
-    console.log(partida)
+     partida = req.query.idPartida
   }else{
-    partida = req.body.partidaid
+     partida = req.body.partidaid
   }
-  const response = await fetch("http://"+Dir+"/api/invitados/"+partida+"")
+  //const partida = req.body.partida
+  const response = await fetch(Dir+"/api/invitados/"+partida+"")
   const data = await response.json();
   const invitados = data
   res.render("invitar.ejs", { invitados,partida });
 
 };
 
-export const SendData = passport.authenticate('local.login', {  
+ export const SendData = passport.authenticate('local.login', {  
   successRedirect: '/partidas', //perfil
   failureRedirect: '/login',
   failureFlash: true
-});
+}); 
 
-/* export const SendData = async (req, res) => {  
-  console.log(req.body)
-  const response = await fetch("http://"+Dir+"/api/post", {
-    method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    mode: 'cors', // no-cors, *cors, same-origin
-    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: 'same-origin', // include, *same-origin, omit
-    headers: {
-      'Content-Type': 'application/json'
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    redirect: 'follow', // manual, *follow, error
-    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    body: JSON.stringify(req.body) // body data type must match "Content-Type" header
-  });
-  return response.json(); // parses JSON response into native JavaScript objects
-
-
-}; */
 
 
 
 export const register = async (req, res) => {
   try {
-    const response = await fetch("http://"+Dir+"/api/register", {
+    const response = await fetch(Dir+"/api/register", {
       method: 'post',
       body: JSON.stringify(req.body),
       headers: { "Content-Type": "application/json" },
     });
-    const resp = await response.json()
     if (response.status == 200)
       res.render("Login.ejs");
     else

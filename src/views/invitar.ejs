@@ -18,13 +18,35 @@
         <div class="row">
             <div class="col-12 text-center" style="padding: 10px; margin-top: 2%;">
                 <h1 class="page-title" style="margin-bottom: 10px;">Partida</h1>
+                <label>¡Invita amigos a tu partida!</label>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <div class="form-group" style="display: flex; justify-content: center; align-items: center;">
-            <label>¡Invita amigos a tu partida!</label>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="submit" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmModal2">
+                <i class="bi bi-trash-fill"></i> Borrar partida
+            </button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="confirmModal2" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirmación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que quieres borrar la partida? Esta acción no se puede deshacer.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger">Borrar</button>
+                </div>
+            </div>
+            </div>
         </div>
 
         <div class="tab-content" id="myTabContent">
@@ -51,6 +73,7 @@
                                         <th scope="col">Telefono</th>
                                         <th scope="col">Correo</th>
                                         <th scope="col">Estado de solicitud</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
 
@@ -62,6 +85,14 @@
                                             <td scope="col"><%= invitados[i].telefono %></td>
                                             <td scope="col"><%= invitados[i].correo %></td>
                                             <td scope="col"><%= invitados[i].estado %></td>
+                                            <th scope="col">
+                                                <button type="submit" class="btn btn-success">
+                                                    <i class="bi bi-envelope-plus-fill"></i> Reenviar
+                                                </button>
+                                                <button type="submit" class="btn btn-secondary">
+                                                    <i class="bi bi-pencil-fill"></i> Editar
+                                                </button>
+                                            </th>
                                         </tr>
                                     <% } %>
                                 </tbody>
@@ -102,8 +133,8 @@
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" id="sendInvitationButton" class="btn btn-primary">Enviar
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" id="sendInvitationButton" class="btn btn-success">Enviar
                             invitación</button>
                     </div>
                 </div>

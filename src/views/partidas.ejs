@@ -135,11 +135,14 @@
                     </div>
                     <input type="hidden" name="idPartida">
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button> 
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button> 
                         <button type="button" class="btn btn-primary" id="btn-invitar">Invitar</button> 
+                    </form>
+                    <form action="/Iniciar" method="post">
+                        <input type="hidden" name="idPartida">
                         <button class="btn btn-success btn-iniciar">Iniciar</button>
+                    </form>
                     </div>
-                </form>
             </div>
         </div>
     </div>
